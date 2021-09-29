@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <p id='message1'>Next Data Will Collecting in <span id='count1'> 10</span> Seconds.</p>
+  <p id='message1'>Next Data Will Collecting in <span id='count1'> 60</span> Seconds.</p>
   <button id="btn_all_start" value="btn_all_start" name="btn_all_start">All Day Kick Here</button>
   <button id="btn_stop" value="btn_stop" name="btn_stop">Stop</button>
 
@@ -71,7 +71,7 @@
       return new Promise(function (resolve, reject) 
       {
         console.log("In the timer function");
-        let count = 10;
+        let count = 60;
         timer1 = setInterval(function () 
         {
           count--;
@@ -86,7 +86,7 @@
             message1.style.display = 'block';
             resolve('Time is up');
             clearInterval(timer1);
-            count = 10;
+            count = 60;
           }
         }, 1000);
       });
@@ -119,7 +119,7 @@
   <button id="ex_start" value="ex_start" name="ex_start">Experiment Kick Here</button>
   <button id="switch_sample" value="val_sample" name="sample_but">switch_sample</button>
   <button id="switch_purge" value="val_purge" name="purge_but">switch_purge</button>
-  <p id='message2'>Next Status will be in <span id='count2'> 10</span> Seconds.</p>
+  <p id='message2'>Next Status will be in <span id='count2'> 300</span> Seconds.</p>
 
   <script>
   let Ex_count = 0;
@@ -286,7 +286,7 @@
       clearInterval(timer2);
       console.log(Ex_count, values);
       //judgment switch sample
-      if (Ex_count == 10 & Ex_Status == 0)
+      if (Ex_count == 300 & Ex_Status == 0)
       {
         Switch_Sample = false
       }
@@ -305,7 +305,7 @@
       }
 
       //judgment switch purge
-      if (Ex_count == 10 & Ex_Status == 1)
+      if (Ex_count == 300 & Ex_Status == 1)
       {
         Switch_Purge = false
       }
@@ -326,7 +326,7 @@
         {
           TESTB2();
         }
-        if(Ex_count == 10)
+        if(Ex_count == 300)
         {
           StopTimer1 == false
           console.log('Experiment Done')
