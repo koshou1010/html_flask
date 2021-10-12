@@ -238,3 +238,4 @@ def ChooseComPort():
 #   command = "SC RE"
 #   main(command, 0)
 
+
