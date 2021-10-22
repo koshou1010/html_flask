@@ -24,6 +24,7 @@
   function Stop_Func() 
   {
     StopTimer1 = false
+    Ex_Status=0;
     Ex_count = 0;
   }
   function AllDay_Func() 
@@ -117,8 +118,6 @@
   <input type="text" id="input_text" name="input_text" placeholder="ex., CO_25ppm">
   <br>
   <button id="ex_start" value="ex_start" name="ex_start">Experiment Kick Here</button>
-  <button id="switch_sample" value="val_sample" name="sample_but">switch_sample</button>
-  <button id="switch_purge" value="val_purge" name="purge_but">switch_purge</button>
   <p id='message2'>Next Status will be in <span id='count2'> 300</span> Seconds.</p>
 
   <script>
@@ -331,6 +330,7 @@
           StopTimer1 == false
           console.log('Experiment Done')
           Stop_Func();
+          send_ex_done_F();
         }
       }
     });
@@ -341,7 +341,42 @@
     TESTA2();
   }
 
+  function send_ex_done_F() 
+  {
+    function send_ex_done() 
+    {
+      return new Promise(function (resolve, reject) 
+      {
+        var data =
+        {
+          'btn': 'ex_done',
+        }
+        $.ajax
+          ({
+            type: "POST",
+            url: "/",
+            data: JSON.stringify(data, null, '\t'),
+            contentType: 'application/json;charset=UTF-8',
+            success: function (result) 
+            {
+              console.log('ajax successed_send_ex_done');
+            },
+            error: function (result) 
+            {
+              console.log('ajax error');
+            }
+          })
+          .done(resolve)
+          .fail(reject);
+      });
+    }
 
+    var p7 = send_ex_done();
+    Promise.all([p7]).then(values => 
+    {
+      console.log(values);
+    });
+  }
 
   </script>
 
