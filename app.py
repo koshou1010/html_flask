@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def server():
+    print("machine_id = ",machine_id2)
     #print("IN SERVER")
     # data = request.get_data()
     if request.method == 'POST':
@@ -20,6 +21,8 @@ def server():
         catchdata.SwitchSample()
       if request.json['btn'] == 'switch_purge':
         catchdata.SwitchPurge()
+      if request.json['btn'] == 'ex_done':
+        catchdata.add_ex_finish()
     return render_template('front.html')
 
 if __name__ == '__main__':
