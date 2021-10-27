@@ -78,6 +78,7 @@ def Dump2ndjson(content, CheckAllorEx, *args):
   # print(keylist)
   #print(Time)
   # print(channellist)
+  global All_filename
   All_filename = Time.split('T')[0].replace("-", "_")
   Ex_filename = Time.split('T')[0].replace("-", "_")
   #print(Ex_filename)
@@ -88,6 +89,17 @@ def Dump2ndjson(content, CheckAllorEx, *args):
   if CheckAllorEx == 1:
     SaveFile_Ex(json_dump, Ex_filename, args[0])
   print(json_dump)
+
+SENDFLAG = True
+def send_ex_start():
+  if SENDFLAG == True:
+    Time = datetime.datetime.now().isoformat() + "+08:00"
+    ex_start = '{"name": "control_status", "meta_index": -1, "l_date":"'+str(Time)+'", "status_flag":"experient_start"}'
+    nowpath = os.getcwd()
+    All_Floder = "All_Day"
+    filename = nowpath + "\\"+All_Floder+"\\"+ ID.strip() +"\\" + ID.strip() + "_"+ All_filename + ".ndjson"
+    with open(filename, "a") as file_object:
+      file_object.write("\n"+ex_start)
 
 def add_gas_in():
   Time = datetime.datetime.now().isoformat() + "+08:00"
@@ -252,6 +264,8 @@ def All_Out(machine_id2):
 
 
 def Ex_Out(input_gas, machine_id2):
+  global SENDFLAG
+  SENDFLAG = False
   command = "SR RO"
   global ID
   ID = machine_id2 
@@ -289,6 +303,10 @@ def ChooseComPort():
       serialFd = serial.Serial(serialName, 115200, timeout=1)
       return serialFd
   
+
+
+
+
 # if __name__ =='__main__':
 #   command = "SC RE"
 #   main(command, 0)

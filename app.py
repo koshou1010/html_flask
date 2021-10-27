@@ -16,6 +16,7 @@ def server():
         catchdata.All_Out(machine_id2)
       if request.json['btn'] == 'ex':
         input_gas = request.json['input_gas']
+        # catchdata.send_ex_start()
         catchdata.Ex_Out(input_gas, machine_id2)
       if request.json['btn'] == 'switch_sample':
         catchdata.SwitchSample()
