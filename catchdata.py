@@ -90,16 +90,16 @@ def Dump2ndjson(content, CheckAllorEx, *args):
     SaveFile_Ex(json_dump, Ex_filename, args[0])
   print(json_dump)
 
-SENDFLAG = True
-def send_ex_start():
-  if SENDFLAG == True:
-    Time = datetime.datetime.now().isoformat() + "+08:00"
-    ex_start = '{"name": "control_status", "meta_index": -1, "l_date":"'+str(Time)+'", "status_flag":"experient_start"}'
-    nowpath = os.getcwd()
-    All_Floder = "All_Day"
-    filename = nowpath + "\\"+All_Floder+"\\"+ ID.strip() +"\\" + ID.strip() + "_"+ All_filename + ".ndjson"
-    with open(filename, "a") as file_object:
-      file_object.write("\n"+ex_start)
+# SENDFLAG = True
+# def send_ex_start():
+#   if SENDFLAG == True:
+#     Time = datetime.datetime.now().isoformat() + "+08:00"
+#     ex_start = '{"name": "control_status", "meta_index": -1, "l_date":"'+str(Time)+'", "status_flag":"experient_start"}'
+#     nowpath = os.getcwd()
+#     All_Floder = "All_Day"
+#     filename = nowpath + "\\"+All_Floder+"\\"+ ID.strip() +"\\" + ID.strip() + "_"+ All_filename + ".ndjson"
+#     with open(filename, "a") as file_object:
+#       file_object.write("\n"+ex_start)
 
 def add_gas_in():
   Time = datetime.datetime.now().isoformat() + "+08:00"
@@ -197,7 +197,7 @@ class FT232:
           #print("Rsponse : %s" % line.decode('utf-8'))
           if count_SP == 11:
             print("Rsponse : %s" % line.decode('utf-8'))
-            add_gas_in()
+            add_gas_out()
             # print("switch to sample successed")
             break
         except:
