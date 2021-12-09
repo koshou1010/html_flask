@@ -150,6 +150,7 @@ class FT232:
       if Cmd == 'SC RE\r':  # get machine id
         count_MID += 1
         line = ser.readline()
+        
         try:
           if count_MID == 7:
             print("machine id get successed")
